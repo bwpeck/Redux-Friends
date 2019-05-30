@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { fetch } from './actions'
-import { add } from './actions'
+import { fetch,add, deleteFriend } from './actions'
 import { connect } from 'react-redux';
 class App extends Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class App extends Component {
         {this.props.friends.map((item, index) => {
           return <div className='friend-div' key={index}>
             <p>{item.name}</p>
-            <p>X</p>
+            <button onClick ={()=>{this.props.deleteFriend(item.id)}}>X</button>
           </div>
         })}
         <form className='form' onSubmit={this.submitHandler}>
@@ -65,5 +64,6 @@ const mapStatetoProps = state => {
 
 export default connect(mapStatetoProps, {
   fetch,
-  add
+  add,
+  deleteFriend
 })(App)
